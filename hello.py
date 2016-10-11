@@ -10,9 +10,15 @@ def hello():
 #def name(name):
 #	return "Your name is %s" % name
 
-@app.route('/name')
+#@app.route('/name')
+#def name():
+#	name = request.args.get('name')
+#	return "Your name is %s" % name
+
+@app.route('/name', methods=["GET", "POST"])
 def name():
-	name = request.args.get('name')
+	print(request.form)
+	name = request.form["name"]
 	return "Your name is %s" % name
 
 if __name__ == "__main__":

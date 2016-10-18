@@ -22,12 +22,27 @@
 	
 	<form action="/name" method="GET">
 		<input id="name" name="name" type="text"/>
-		<input type="submit"/>
+		<input id="submit" type="submit"/>
 	</form>
+	
+	<br/>
+	
+	<textarea id="serveroutput" hidden="true"></textarea>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+	<script>
+		$("#submit").click(function(e) {
+			e.preventDefault();
+			
+			$.get("/name?name=" + encodeURIComponent($("#name").val()), function(data) {
+				$("#serveroutput").text(data);
+				$('#serveroutput').prop('hidden', false);
+			});
+		});
+	</script>
   </body>
 </html>
